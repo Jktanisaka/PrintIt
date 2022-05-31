@@ -1,9 +1,11 @@
 .righteous {
   font-family: righteous, sans-serif;
+  font-size: 48px;
 }
 
 .catamaran {
   font-family: catamaran, sans-serif;
+  font-weight: bold;
 }
 
 .cairo {
@@ -16,4 +18,8 @@
 
 .white-text {
   color: white;
+}
+
+.text-shadow {
+  text-shadow: 2px 2px 2px lightgray;
 }
