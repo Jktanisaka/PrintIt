@@ -6,7 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 export default class App extends React.Component {
   render() {
     return (
-      <div>
+      <div className='bg-gray'>
     <MainNavbar />
     <EntryForm />
     </div>

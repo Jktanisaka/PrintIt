@@ -8,12 +8,16 @@
   font-weight: bold;
 }
 
+.bg-gray {
+  background-color: #f3efef;
+}
+
 .cairo {
   font-family: cairo, sans-serif;
 }
 
 .bg-orange {
-  background-color: #f15025;
+  background-color: #f15025 !important;
 }
 
 .white-text {
@@ -22,4 +26,12 @@
 
 .text-shadow {
   text-shadow: 2px 2px 2px lightgray;
+}
+
+.logo-shadow {
+  text-shadow: 2px 2px 2px rgb(48, 48, 48);
+}
+
+label {
+  font-size: 22px;
 }
