@@ -12,6 +12,13 @@ if (process.env.NODE_ENV === 'development') {
 
 app.use(express.static(publicPath));
 
+// app.post('/api/uploads', req, res, next => {
+//   const sql = `
+//   insert into "entries" ("description", "title", "printer", "totalFilamentUsed", "timeToPrint", "createdAt" "printSpeed", "supports", "layerHeight", "wallThickness", "additionalDetails", "imageUrl")
+//   values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
+//   `
+// })
+
 app.get('/api/hello', (req, res) => {
   res.json({ hello: 'world' });
 });
