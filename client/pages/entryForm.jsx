@@ -8,8 +8,9 @@ export default class EntryForm extends React.Component {
     this.handleTitleChange = this.handleTitleChange.bind(this);
     this.handlePrinterChange = this.handlePrinterChange.bind(this);
     this.handleFilamentChange = this.handleFilamentChange.bind(this);
-    this.handleTimeToPrintChange = this.handleTimeToPrintChange.bind(this);
-    this.handlePrintSpeedChange = this.handleTimeToPrintChange.bind(this);
+    this.handleHoursToPrintChange = this.handleHoursToPrintChange.bind(this);
+    this.handleMinutesToPrintChange = this.handleMinutesToPrintChange.bind(this);
+    this.handlePrintSpeedChange = this.handlePrintSpeedChange.bind(this);
     this.handleSupportChange = this.handleSupportChange.bind(this);
     this.handleLayerHeightChange = this.handleLayerHeightChange.bind(this);
     this.handleWallThicknessChange = this.handleWallThicknessChange.bind(this);
@@ -19,16 +20,17 @@ export default class EntryForm extends React.Component {
       description: '',
       title: '',
       printer: '',
-      totalFilamentUsed: 0,
-      timeToPrint: 0,
-      printSpeed: 0,
-      supports: null,
-      layerHeight: 0,
-      wallThickness: 0,
+      totalFilamentUsed: '',
+      hoursToPrint: '',
+      minutesToPrint: '',
+      printSpeed: '',
+      supports: '',
+      layerHeight: '',
+      wallThickness: '',
       additionalDetails: '',
       searchTags: '',
-      objectFiles: null,
-      imageUrl: null
+      objectFiles: '',
+      imageUrl: ''
     };
   }
 
@@ -54,8 +56,12 @@ export default class EntryForm extends React.Component {
     this.setState({ totalFilamentUsed: event.target.value });
   }
 
-  handleTimeToPrintChange(event) {
-    this.setState({ timeToPrint: event.target.value });
+  handleHoursToPrintChange(event) {
+    this.setState({ hoursToPrint: event.target.value });
+  }
+
+  handleMinutesToPrintChange(event) {
+    this.setState({ minutesToPrint: event.target.value });
   }
 
   handlePrintSpeedChange(event) {
@@ -86,7 +92,7 @@ export default class EntryForm extends React.Component {
     return (
     <div className = "container-fluid col-10 pb-3">
       <h1 className = "catamaran text-shadow mt-3">Create Entry</h1>
-      <form className='row bg-white px-5 mb-3 pt-4 rounded-3 shadow'>
+      <form className='row bg-white px-3 px-md-5 mb-3 pt-4 rounded-3 shadow' onSubmit={this.handleSubmit}>
         <div className='col-12 col-md-6'>
         <div className="form-group">
           <label htmlFor="formFile" className="form-label cairo">Upload Image</label>
@@ -112,10 +118,10 @@ export default class EntryForm extends React.Component {
           <div className="form-group row justify-content-between cairo mb-2">
             <label htmlFor="filament" className="cairo">Time to Print</label>
           <span className='col-6 cairo'>
-              <input type="hours" className="form-control col-6 cairo" id="hours" placeholder="Hours" ></input>
+              <input type="hours" className="form-control col-6 cairo text-center" id="hours" placeholder="Hours" value={this.state.hoursToPrint} onChange={this.handleHoursToPrintChange}></input>
           </span>
           <span className='col-6 cairo'>
-              <input type="hours" className="form-control cairo" id="minutes" placeholder="Minutes" ></input>
+              <input type="hours" className="form-control cairo text-center" id="minutes" placeholder="Minutes" value={this.state.minutesToPrint} onChange={this.handleMinutesToPrintChange}></input>
           </span>
        </div>
           <div className="form-group mb-2 position-relative">
@@ -126,10 +132,9 @@ export default class EntryForm extends React.Component {
         </div>
         <div className='col-12 col-md-6'>
         <label htmlFor="supports" className='mb-2 cairo'>Supports</label>
-        <select type="supports" className="form-select cairo mb-2" aria-label="Default select example">
-          <option selected>Were supports used?</option>
-            <option value={this.state.support} onChange={this.handleSupportChange}>Yes</option>
-          <option value={this.state.support} onChange={this.handleSupportChange}>No</option>
+            <select type="supports" className="form-select cairo mb-2" aria-label="Default select example" value={this.state.support} onChange={this.handleSupportChange}>
+          <option onChange={this.handleSupportChange}>Yes</option>
+          <option onChange={this.handleSupportChange}>No</option>
         </select>
         <div className="form-group position-relative">
             <label htmlFor="layerHeight" className='cairo'>Layer Height</label>
