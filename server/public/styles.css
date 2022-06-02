@@ -17,7 +17,7 @@
 }
 
 .bg-orange {
-  background-color: #f15025;
+  background-color: #f15025 !important;
 }
 
 .white-text {

@@ -76,6 +76,8 @@ export default class EntryForm extends React.Component {
           additionalDetails: '',
           searchTags: ''
         });
+        this.objectFilesRef.current.value = null;
+        this.imageInputRef.current.value = null;
       })
       .catch(err => console.error(err));
   }
@@ -135,7 +137,7 @@ export default class EntryForm extends React.Component {
       <form className='row bg-white px-3 px-md-5 mb-3 pt-4 rounded-3 shadow' onSubmit={this.handleSubmit}>
         <div className='col-12 col-md-6'>
         <div className="form-group">
-          <label htmlFor="formFile" className="form-label cairo">Upload Image</label>
+          <label htmlFor="formFile" className="form-label mb-1 cairo">Upload Image</label>
             <input className="form-control mb-2" type="file" id="formFile" ref={this.imageInputRef} accept=".png, .jpg, .jpeg, .gif" ></input>
         </div>
         <div className="form-group mb-2">
@@ -171,7 +173,7 @@ export default class EntryForm extends React.Component {
         </div>
         </div>
         <div className='col-12 col-md-6'>
-        <label htmlFor="supports" className='mb-2 cairo'>Supports</label>
+        <label htmlFor="supports" className='mb-1 cairo'>Supports</label>
           <select type="supports" className="form-select cairo mb-2" aria-label="Default select example" value={this.state.supports} onChange={this.handleSupportChange}>
           <option value="yes">Yes</option>
           <option value="no">No</option>
@@ -200,7 +202,7 @@ export default class EntryForm extends React.Component {
           </div>
         </div>
         <div className="container-fluid justify-content-center col-12 mt-3 mb-5">
-            <button type="submit" className="btn-primary btn btn-lg p-3  btn-outline-secondary text-light col-12 cairo shadow">Save</button>
+            <button type="submit" className="bg-orange btn btn-lg p-3  btn-outline-secondary text-light col-12 cairo shadow">Save</button>
         </div>
       </form>
    </div>

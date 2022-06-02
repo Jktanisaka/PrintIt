@@ -21,11 +21,6 @@ if (process.env.NODE_ENV === 'development') {
 app.use(express.static(publicPath));
 
 app.post('/api/uploads', express.urlencoded(), uploadsMiddleware, (req, res, next) => {
-  /*  insert an entry -
-      insert url for each file uploaded-
-      insert all supplied tags-
-      insert association between tags and entries-
-  */
   const sql = `
   with "newEntry" as (
     insert into "entries" ("userId", "description", "title", "printer", "totalFilamentUsed", "timeToPrint", "createdAt", "printSpeed", "supports", "layerHeight", "wallThickness", "additionalDetails", "imageUrl")
@@ -53,8 +48,6 @@ app.post('/api/uploads', express.urlencoded(), uploadsMiddleware, (req, res, nex
     ) as "t" on true
   )
   select * from "newEntry"
-
-
   `;
   const {
     description, title, printer, totalFilamentUsed, timeToPrint,
