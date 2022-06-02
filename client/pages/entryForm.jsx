@@ -27,7 +27,7 @@ export default class EntryForm extends React.Component {
       hoursToPrint: '',
       minutesToPrint: '',
       printSpeed: '',
-      supports: '',
+      supports: 'no',
       layerHeight: '',
       wallThickness: '',
       additionalDetails: '',
@@ -62,6 +62,20 @@ export default class EntryForm extends React.Component {
       body: formData
     }).then(res => res.json())
       .then(response => {
+        this.setState({
+          description: '',
+          title: '',
+          printer: '',
+          totalFilamentUsed: '',
+          hoursToPrint: '',
+          minutesToPrint: '',
+          printSpeed: '',
+          supports: 'no',
+          layerHeight: '',
+          wallThickness: '',
+          additionalDetails: '',
+          searchTags: ''
+        });
       })
       .catch(err => console.error(err));
   }
@@ -186,7 +200,7 @@ export default class EntryForm extends React.Component {
           </div>
         </div>
         <div className="container-fluid justify-content-center col-12 mt-3 mb-5">
-          <button type="submit" className="btn btn-lg bg-orange p-3  btn-outline-secondary text-light col-12 cairo shadow">Save</button>
+            <button type="submit" className="btn-primary btn btn-lg p-3  btn-outline-secondary text-light col-12 cairo shadow">Save</button>
         </div>
       </form>
    </div>

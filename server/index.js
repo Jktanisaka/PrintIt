@@ -71,7 +71,8 @@ app.post('/api/uploads', express.urlencoded(), uploadsMiddleware, (req, res, nex
     objectFileUrls, tags];
   db.query(sql, params)
     .then(result => {
-      res.end();
+      const response = result.rows;
+      res.status(201).json(response);
     })
     .catch(error => next(error));
 });
