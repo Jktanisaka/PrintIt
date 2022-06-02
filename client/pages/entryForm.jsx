@@ -16,6 +16,9 @@ export default class EntryForm extends React.Component {
     this.handleWallThicknessChange = this.handleWallThicknessChange.bind(this);
     this.handleAdditonalDetailsChange = this.handleAdditonalDetailsChange.bind(this);
     this.handleSearchTagsChange = this.handleSearchTagsChange.bind(this);
+    this.imageInputRef = React.createRef();
+    this.objectFilesRef = React.createRef();
+
     this.state = {
       description: '',
       title: '',
@@ -28,16 +31,39 @@ export default class EntryForm extends React.Component {
       layerHeight: '',
       wallThickness: '',
       additionalDetails: '',
-      searchTags: '',
-      objectFiles: '',
-      imageUrl: ''
+      searchTags: ''
     };
   }
 
   handleSubmit(event) {
     event.preventDefault();
-
-    // const formData = new FormData()
+    const formData = new FormData();
+    formData.append('description', this.state.description);
+    formData.append('title', this.state.title);
+    formData.append('printer', this.state.printer);
+    formData.append('totalFilamentUsed', this.state.totalFilamentUsed);
+    formData.append('timeToPrint', this.state.hoursToPrint + this.state.minutesToPrint);
+    formData.append('printSpeed', this.state.printSpeed);
+    formData.append('supports', this.state.supports);
+    formData.append('layerHeight', this.state.layerHeight);
+    formData.append('wallThickness', this.state.wallThickness);
+    formData.append('additionalDetails', this.state.additionalDetails);
+    formData.append('searchTags', this.state.searchTags);
+    formData.append('image', this.imageInputRef.current.files[0]);
+    const tagsArr = this.state.searchTags.split(' ');
+    for (let i = 0; i < this.objectFilesRef.current.files.length; i++) {
+      formData.append('objects', this.objectFilesRef.current.files[i]);
+    }
+    for (let i = 0; i < tagsArr.length; i++) {
+      formData.append('tags', tagsArr[i]);
+    }
+    return fetch('api/uploads', {
+      method: 'POST',
+      body: formData
+    }).then(res => res.json())
+      .then(response => {
+      })
+      .catch(err => console.error(err));
   }
 
   handleDescriptionChange(event) {
@@ -69,7 +95,7 @@ export default class EntryForm extends React.Component {
   }
 
   handleSupportChange(event) {
-    this.setState({ support: event.target.value });
+    this.setState({ supports: event.target.value });
   }
 
   handleLayerHeightChange(event) {
@@ -85,7 +111,7 @@ export default class EntryForm extends React.Component {
   }
 
   handleSearchTagsChange(event) {
-    this.setState({ additionalDetails: event.target.value });
+    this.setState({ searchTags: event.target.value });
   }
 
   render() {
@@ -96,7 +122,7 @@ export default class EntryForm extends React.Component {
         <div className='col-12 col-md-6'>
         <div className="form-group">
           <label htmlFor="formFile" className="form-label cairo">Upload Image</label>
-            <input className="form-control mb-2" type="file" id="formFile" ></input>
+            <input className="form-control mb-2" type="file" id="formFile" ref={this.imageInputRef} accept=".png, .jpg, .jpeg, .gif" ></input>
         </div>
         <div className="form-group mb-2">
           <label htmlFor="title" className="cairo">Title</label>
@@ -132,9 +158,9 @@ export default class EntryForm extends React.Component {
         </div>
         <div className='col-12 col-md-6'>
         <label htmlFor="supports" className='mb-2 cairo'>Supports</label>
-            <select type="supports" className="form-select cairo mb-2" aria-label="Default select example" value={this.state.support} onChange={this.handleSupportChange}>
-          <option onChange={this.handleSupportChange}>Yes</option>
-          <option onChange={this.handleSupportChange}>No</option>
+          <select type="supports" className="form-select cairo mb-2" aria-label="Default select example" value={this.state.supports} onChange={this.handleSupportChange}>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
         </select>
         <div className="form-group position-relative">
             <label htmlFor="layerHeight" className='cairo'>Layer Height</label>
@@ -151,16 +177,16 @@ export default class EntryForm extends React.Component {
           <textarea className="form-control mb-2" id="description" rows="4" placeholder='Enter any additional details' value={this.state.additionalDetails} onChange={this.handleAdditonalDetailsChange}></textarea>
         </div>
         <div className="mb-2">
-            <label htmlFor="objectFiles" className=" cairo">Object File(s)</label>
-          <input className="form-control" type="file" id="objectFiles" multiple></input>
+            <label htmlFor="objectFiles" className="cairo">Object File(s)</label>
+          <input className="form-control" type="file" id="objectFiles" multiple ref={this.objectFilesRef}></input>
         </div>
           <div className="form-group mb-2">
             <label htmlFor="searchTags" className='cairo'>Search Tags</label>
-            <textarea className="form-control" id="searchTags" rows="4" placeholder='Enter tags so others can find your print! eg(plant nature outdoors)'></textarea>
+            <textarea className="form-control" id="searchTags" rows="4" placeholder='Enter tags so others can find your print! eg(plant nature outdoors)' value={this.state.searchTags} onChange={this.handleSearchTagsChange}></textarea>
           </div>
         </div>
         <div className="container-fluid justify-content-center col-12 mt-3 mb-5">
-          <button type="submit" className="btn btn-lg bg-orange p-3  btn-outline-secondary text-light col-12 cairo shadow" >Save</button>
+          <button type="submit" className="btn btn-lg bg-orange p-3  btn-outline-secondary text-light col-12 cairo shadow">Save</button>
         </div>
       </form>
    </div>

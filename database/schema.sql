@@ -28,7 +28,7 @@ CREATE TABLE "public"."entries" (
 	"timeToPrint" int NOT NULL,
 	"createdAt" timestamp with time zone NOT NULL,
 	"printSpeed" int NOT NULL,
-	"supports" BOOLEAN NOT NULL,
+	"supports" TEXT NOT NULL,
 	"layerHeight" float4,
 	"wallThickness" float4,
 	"additionalDetails" TEXT,
@@ -51,7 +51,7 @@ CREATE TABLE "public"."favorites" (
 
 CREATE TABLE "public"."files" (
 	"entryId" int NOT NULL,
-	"fileUrl" int NOT NULL
+	"fileUrl" text NOT NULL
 ) WITH (
   OIDS=FALSE
 );
@@ -61,7 +61,8 @@ CREATE TABLE "public"."files" (
 CREATE TABLE "public"."tags" (
 	"tagId" serial NOT NULL,
 	"label" TEXT NOT NULL,
-	CONSTRAINT "tags_pk" PRIMARY KEY ("tagId")
+	CONSTRAINT "tags_pk" PRIMARY KEY ("tagId"),
+  unique("label")
 ) WITH (
   OIDS=FALSE
 );
