@@ -16,6 +16,11 @@
   font-family: cairo, sans-serif;
 }
 
+.cairo-bold {
+  font-family: cairo, sans-serif;
+  font-weight: bold;
+}
+
 .bg-orange {
   background-color: #f15025 !important;
 }
@@ -39,4 +44,12 @@ label {
 .btn-orange-custom {
   color: white;
   background-color: #f15025;
+}
+
+img {
+  object-fit: contain;
+}
+
+.card {
+  max-height: 200px;
 }
