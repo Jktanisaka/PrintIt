@@ -1,6 +1,7 @@
 require('dotenv/config');
 const pg = require('pg');
 const path = require('path');
+const ClientError = require('./client-error');
 const express = require('express');
 const errorMiddleware = require('./error-middleware');
 const uploadsMiddleware = require('./uploads-middleware');
@@ -19,6 +20,24 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 app.use(express.static(publicPath));
+
+app.get('/api/users/:userId/entries', (req, res, next) => {
+  const userId = Number(req.params.userId);
+  const sql = `
+    select "title","imageUrl", "entryId"
+    from entries
+    where "userId" = $1
+  `;
+  const params = [userId];
+  db.query(sql, params)
+    .then(result => {
+      if (!result.rows[0]) {
+        throw new ClientError(404, `cannot find entries for user with ID:${userId}`);
+      }
+      res.status(201).json(result.rows);
+    })
+    .catch(err => next(err));
+});
 
 app.post('/api/uploads', express.urlencoded(), uploadsMiddleware, (req, res, next) => {
   const sql = `
