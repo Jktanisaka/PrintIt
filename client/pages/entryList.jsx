@@ -1,8 +1,5 @@
 import React from 'react';
 
-// fetch('/api/1/entries')
-//   .then(res => res.json())
-//   .then(entries => this.setState({ entries }));
 export default class EntryList extends React.Component {
   constructor(props) {
     super(props);
@@ -11,8 +8,8 @@ export default class EntryList extends React.Component {
     };
   }
 
-  componentDidMount() {
-    fetch('/api/users/1/entries')
+  componentDidMount(props) {
+    fetch(`/api/users/${this.props.userId}/entries`)
       .then(res => res.json())
       .then(entries => {
         this.setState({ entries });
@@ -21,17 +18,21 @@ export default class EntryList extends React.Component {
 
   render(props) {
     return (
-      <div className ="container-fluid col-10 pb-3">
-        <h1 className="catamaran text-shadow mt-3">Entries</h1>
+      <div className ="container-fluid pb-3 row justify-content-center m-0">
+        <h1 className="catamaran text-shadow mt-3 col-md-9">Entries</h1>
         <div className='row justify-content-center'>
-        {
-          this.state.entries.map(entry => (
-            <div key={entry.entryId} className="card col-sm-10 col-md-6 col-lg-3">
-              <img src={entry.imageUrl} className="h-75 card-img-top col-12"></img>
-              <h5 className='cairo-bold'>{entry.title}</h5>
-              </div>
-          ))
-        }
+          <div className='row justify-content-start align-content-center col-md-10 ms-md-3'>
+          {
+            this.state.entries.map(entry => (
+              <a key={entry.entryId} role="button" className="text-decoration-none card col-lg-3 col-md-5 mt-3 m-md-3 p-0 rounded border-hover border-0">
+                <img src={entry.imageUrl} className="h-75 card-img-top bg-black"></img>
+                <div className='card-body p-0 row align-items-center ps-2'>
+                  <h5 className='cairo-bold card-title m-0'>{entry.title}</h5>
+                </div>
+              </a>
+            ))
+          }
+          </div>
         </div>
       </div>
     );

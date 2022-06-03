@@ -25,9 +25,9 @@ export default class App extends React.Component {
       return <EntryForm />;
     }
     if (route.path === 'entries') {
-      return <EntryList />;
+      const userId = this.state.route.params.get('userId');
+      return <EntryList userId = {userId}/>;
     }
-
   }
 
   render() {

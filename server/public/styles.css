@@ -10,6 +10,7 @@
 
 .bg-gray {
   background-color: #f3efef;
+  height: 100%;
 }
 
 .cairo {
@@ -19,6 +20,8 @@
 .cairo-bold {
   font-family: cairo, sans-serif;
   font-weight: bold;
+  font-size: 14px;
+  color: black;
 }
 
 .bg-orange {
@@ -48,8 +51,24 @@ label {
 
 img {
   object-fit: contain;
+  min-height: 90;
+}
+
+.bg-black {
+  background-color: black;
 }
 
 .card {
-  max-height: 200px;
+  max-height: 180px;
+}
+
+.border-hover {
+  box-shadow: 0 0 3px black;
+  transition-property: box-shadow;
+  transition-duration: 0.2s;
+  transition-delay: 0;
+}
+
+.border-hover:hover {
+  box-shadow: 0 0 25px #f15025;
 }
