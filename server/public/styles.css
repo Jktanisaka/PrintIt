@@ -9,12 +9,17 @@
 }
 
 .bg-gray {
-  background-color: #f3efef;
+  background-color: #f3efef !important;
   height: 100%;
+}
+
+.bg-white {
+  background-color: white;
 }
 
 .cairo {
   font-family: cairo, sans-serif;
+  font-weight: normal;
 }
 
 .cairo-bold {
@@ -71,4 +76,11 @@ img {
 
 .border-hover:hover {
   box-shadow: 0 0 25px #f15025;
+}
+
+.accordion-button {
+  text-decoration-color: white !important;
+  height: 50px !important;
+  text-align: center !important;
+  background-color: #f15025 !important;
 }

@@ -21,6 +21,24 @@ if (process.env.NODE_ENV === 'development') {
 
 app.use(express.static(publicPath));
 
+app.get('/api/entries/:entryId', (req, res, next) => {
+  const entryId = Number(req.params.entryId);
+  const sql = `
+    select "title", "description", "imageUrl", "printer", "totalFilamentUsed", "timeToPrint", "printSpeed", "supports", "layerHeight", "wallThickness", "additionalDetails"
+    from entries
+    where "entryId" = $1
+  `;
+  const params = [entryId];
+  db.query(sql, params)
+    .then(result => {
+      if (!result.rows[0]) {
+        throw new ClientError(404, `cannot find entries for user with ID:${entryId}`);
+      }
+      res.status(201).json(result.rows[0]);
+    })
+    .catch(err => next(err));
+});
+
 app.get('/api/users/:userId/entries', (req, res, next) => {
   const userId = Number(req.params.userId);
   const sql = `
