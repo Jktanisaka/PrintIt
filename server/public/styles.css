@@ -79,8 +79,21 @@ img {
 }
 
 .accordion-button {
-  text-decoration-color: white !important;
+  justify-content: center !important;
   height: 50px !important;
   text-align: center !important;
   background-color: #f15025 !important;
+}
+
+.accordion-button:not(.collapsed) {
+  color: black !important;
+}
+
+.accordion-button::after {
+  display: none !important;
+}
+
+.display-img {
+  max-height: 300px;
+  background-color: black;
 }

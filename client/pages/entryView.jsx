@@ -26,8 +26,8 @@ export default class EntryView extends React.Component {
           <div className='justify-space-between'>
             <h3>{title}</h3>
           </div>
-          <img src={imageUrl} className='col-md-6'></img>
-          <div className='col-md-6'>
+          <img src={imageUrl} className='col-md-6 display-img rounded'></img>
+          <div className='col-md-6 p-0'>
             <Accordion defaultActiveKey="0">
               <Accordion.Item eventKey="0" className='bg-gray'>
                 <Accordion.Header>Description</Accordion.Header>
@@ -39,26 +39,26 @@ export default class EntryView extends React.Component {
               </Accordion.Item>
             </Accordion>
         </div>
-          <div className='col-md-6'>
-            <Accordion defaultActiveKey="1">
+          <div className='col-md-6 p-0'>
+            <Accordion >
               <Accordion.Item eventKey="1" className='bg-gray'>
                 <Accordion.Header>Details</Accordion.Header>
                 <Accordion.Body className='p-2'>
                   <div className='col-12 bg-white row rounded m-0 p-2'>
-                    <div className='col-md-6 p-0 ps-2'>
+                    <div className='col-md-6 p-0'>
                       <p className='m-0 cairo-bold'>Printer: <span className='cairo'>{printer}</span></p>
-                      <p className='m-0 cairo-bold'>Total Filament Used: <span className='cairo'>{totalFilamentUsed}</span></p>
-                      <p className='m-0 cairo-bold'>Time to Print: <span className='cairo'>{timeToPrint}</span></p>
-                      <p className='m-0 cairo-bold'>Print Speed: <span className='cairo'>{printSpeed}</span></p>
+                      <p className='m-0 cairo-bold'>Filament Used: <span className='cairo'>{totalFilamentUsed} g</span></p>
+                      <p className='m-0 cairo-bold'>Print Time: <span className='cairo'>{timeToPrint} hours minutes</span></p>
+                      <p className='m-0 cairo-bold'>Print Speed: <span className='cairo'>{printSpeed} mm/s</span></p>
                     </div>
-                    <div className='col-md-6 p-0 ps-2'>
+                    <div className='col-md-6 p-0'>
                       <p className='m-0 cairo-bold'>Supports: <span className='cairo'>{supports}</span></p>
-                      <p className='m-0 cairo-bold'>Layer Height: <span className='cairo'>{layerHeight}</span></p>
-                      <p className='m-0 cairo-bold'>Wall Thickness: <span className='cairo'>{wallThickness}</span></p>
+                      <p className='m-0 cairo-bold'>Layer Height: <span className='cairo'>{layerHeight} mm</span></p>
+                      <p className='m-0 cairo-bold'>Wall Thickness: <span className='cairo'>{wallThickness} mm</span></p>
                     </div>
                   </div>
-                  <div className='col-12 bg-white row rounded m-0 mt-2 p-2'>
-                    <p className='m-0 cairo-bold'>Additional Details: <span className='cairo'>{additionalDetails}</span></p>
+                  <div className='col-12 bg-white row rounded m-0 mt-2 p-1 ps-0'>
+                    <p className='m-0 cairo-bold'>Additional Details: <p className='cairo'>{additionalDetails}</p></p>
                   </div>
                 </Accordion.Body>
               </Accordion.Item>
