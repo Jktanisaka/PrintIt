@@ -30,11 +30,30 @@ app.get('/api/entries/:entryId', (req, res, next) => {
   `;
   const params = [entryId];
   db.query(sql, params)
-    .then(result => {
-      if (!result.rows[0]) {
+    .then(result1 => {
+      if (!result1.rows[0]) {
         throw new ClientError(404, `cannot find entries for user with ID:${entryId}`);
       }
-      res.status(201).json(result.rows[0]);
+      const sql = `
+        select *
+        from files
+        where "entryId" = $1
+      `;
+      const params = [entryId];
+
+      db.query(sql, params)
+        .then(result2 => {
+          const fileUrls = [];
+          for (let i = 0; i < result2.rows.length; i++) {
+            fileUrls.push(result2.rows[i].fileUrl);
+          }
+          const completeEntry = {
+            ...result1.rows[0],
+            fileUrls
+          };
+          res.status(201).json(completeEntry);
+        })
+        .catch(err => next(err));
     })
     .catch(err => next(err));
 });
