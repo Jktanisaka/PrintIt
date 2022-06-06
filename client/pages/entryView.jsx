@@ -28,7 +28,6 @@ export default class EntryView extends React.Component {
         <div className="bg-white row col-10 rounded my-3 shadow">
           <div className=' mb-2 mt-3'>
             <span className='m-0 cairo-bold f-36'>{title}</span>
-            <span className='none'>username placeholder</span>
           </div>
           <div className='px-4 pt-2 col-md-6 mb-md-3'>
             <div className='row justify-content-center'>
