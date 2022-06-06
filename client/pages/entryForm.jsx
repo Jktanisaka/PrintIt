@@ -18,7 +18,6 @@ export default class EntryForm extends React.Component {
     this.handleSearchTagsChange = this.handleSearchTagsChange.bind(this);
     this.imageInputRef = React.createRef();
     this.objectFilesRef = React.createRef();
-
     this.state = {
       description: '',
       title: '',
@@ -42,7 +41,6 @@ export default class EntryForm extends React.Component {
     formData.append('title', this.state.title);
     formData.append('printer', this.state.printer);
     formData.append('totalFilamentUsed', this.state.totalFilamentUsed);
-    formData.append('timeToPrint', this.state.hoursToPrint + this.state.minutesToPrint);
     formData.append('printSpeed', this.state.printSpeed);
     formData.append('supports', this.state.supports);
     formData.append('layerHeight', this.state.layerHeight);
@@ -51,6 +49,10 @@ export default class EntryForm extends React.Component {
     formData.append('searchTags', this.state.searchTags);
     formData.append('image', this.imageInputRef.current.files[0]);
     const tagsArr = this.state.searchTags.split(' ');
+    if (this.state.minutesToPrint.length < 2) {
+      const convertedMinutes = '0' + this.state.minutesToPrint;
+      formData.append('timeToPrint', this.state.hoursToPrint + convertedMinutes);
+    } else { formData.append('timeToPrint', this.state.hoursToPrint + this.state.minutesToPrint); }
     for (let i = 0; i < this.objectFilesRef.current.files.length; i++) {
       formData.append('objects', this.objectFilesRef.current.files[i]);
     }
@@ -70,7 +72,7 @@ export default class EntryForm extends React.Component {
           hoursToPrint: '',
           minutesToPrint: '',
           printSpeed: '',
-          supports: 'no',
+          supports: 'No',
           layerHeight: '',
           wallThickness: '',
           additionalDetails: '',
@@ -127,7 +129,7 @@ export default class EntryForm extends React.Component {
   }
 
   handleSearchTagsChange(event) {
-    this.setState({ searchTags: event.target.value });
+    this.setState({ searchTags: event.target.value.toLowerCase() });
   }
 
   render() {
@@ -175,8 +177,8 @@ export default class EntryForm extends React.Component {
         <div className='col-12 col-md-6'>
         <label htmlFor="supports" className='mb-1 cairo'>Supports</label>
           <select type="supports" className="form-select cairo mb-2" aria-label="Default select example" value={this.state.supports} onChange={this.handleSupportChange}>
-          <option value="yes">Yes</option>
-          <option value="no">No</option>
+          <option value="Yes">Yes</option>
+          <option value="No">No</option>
         </select>
         <div className="form-group position-relative">
             <label htmlFor="layerHeight" className='cairo'>Layer Height</label>

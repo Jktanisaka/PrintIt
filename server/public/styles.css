@@ -9,12 +9,20 @@
 }
 
 .bg-gray {
-  background-color: #f3efef;
-  height: 100%;
+  background-color: #f3efef !important;
+}
+
+.full-height {
+  min-height: 100vh;
+}
+
+.bg-white {
+  background-color: white;
 }
 
 .cairo {
   font-family: cairo, sans-serif;
+  font-weight: normal;
 }
 
 .cairo-bold {
@@ -44,6 +52,14 @@ label {
   font-size: 22px;
 }
 
+.f-13 {
+  font-size: 13px;
+}
+
+.f-36 {
+  font-size: 2rem;
+}
+
 .btn-orange-custom {
   color: white;
   background-color: #f15025;
@@ -71,4 +87,30 @@ img {
 
 .border-hover:hover {
   box-shadow: 0 0 25px #f15025;
+}
+
+.accordion-button {
+  justify-content: center !important;
+  text-align: center !important;
+  background-color: #f15025 !important;
+  height: 28px !important;
+  color: white !important;
+}
+
+.accordion-button::after {
+  display: none !important;
+}
+
+.display-img {
+  background-color: black;
+  max-height: 300px;
+}
+
+.px-3-5 {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.none {
+  display: none;
 }

@@ -2,6 +2,7 @@ import React from 'react';
 import MainNavbar from './pages/navBar';
 import EntryForm from './pages/entryForm';
 import EntryList from './pages/entryList';
+import EntryView from './pages/entryView';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import parseRoute from './lib/parse-route';
 
@@ -28,11 +29,15 @@ export default class App extends React.Component {
       const userId = this.state.route.params.get('userId');
       return <EntryList userId = {userId}/>;
     }
+    if (route.path === 'entry') {
+      const entryId = this.state.route.params.get('entryId');
+      return <EntryView entryId = {entryId}/>;
+    }
   }
 
   render() {
     return (
-      <div className='bg-gray'>
+      <div className='bg-gray full-height'>
     <MainNavbar />
     {this.renderPage()}
     </div>
