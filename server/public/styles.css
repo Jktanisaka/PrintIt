@@ -10,7 +10,10 @@
 
 .bg-gray {
   background-color: #f3efef !important;
-  height: 100%;
+}
+
+.full-height {
+  min-height: 100vh;
 }
 
 .bg-white {
@@ -49,6 +52,14 @@ label {
   font-size: 22px;
 }
 
+.f-13 {
+  font-size: 13px;
+}
+
+.f-36 {
+  font-size: 2rem;
+}
+
 .btn-orange-custom {
   color: white;
   background-color: #f15025;
@@ -80,13 +91,10 @@ img {
 
 .accordion-button {
   justify-content: center !important;
-  height: 50px !important;
   text-align: center !important;
   background-color: #f15025 !important;
-}
-
-.accordion-button:not(.collapsed) {
-  color: black !important;
+  height: 28px !important;
+  color: white !important;
 }
 
 .accordion-button::after {
@@ -94,6 +102,15 @@ img {
 }
 
 .display-img {
-  max-height: 300px;
   background-color: black;
+  max-height: 300px;
+}
+
+.px-3-5 {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.none {
+  display: none;
 }

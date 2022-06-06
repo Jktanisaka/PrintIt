@@ -72,7 +72,7 @@ export default class EntryForm extends React.Component {
           hoursToPrint: '',
           minutesToPrint: '',
           printSpeed: '',
-          supports: 'no',
+          supports: 'No',
           layerHeight: '',
           wallThickness: '',
           additionalDetails: '',
@@ -177,8 +177,8 @@ export default class EntryForm extends React.Component {
         <div className='col-12 col-md-6'>
         <label htmlFor="supports" className='mb-1 cairo'>Supports</label>
           <select type="supports" className="form-select cairo mb-2" aria-label="Default select example" value={this.state.supports} onChange={this.handleSupportChange}>
-          <option value="yes">Yes</option>
-          <option value="no">No</option>
+          <option value="Yes">Yes</option>
+          <option value="No">No</option>
         </select>
         <div className="form-group position-relative">
             <label htmlFor="layerHeight" className='cairo'>Layer Height</label>
