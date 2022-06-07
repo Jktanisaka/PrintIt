@@ -77,10 +77,10 @@ export default class EntryView extends React.Component {
               <Accordion.Item eventKey="1" className='bg-gray border-0 shadow'>
                 <Accordion.Header>Files</Accordion.Header>
                 <Accordion.Body className='p-2'>
-                  <div className='col-12 row rounded m-0 p-0'>
+                  <div className='col-12 row rounded m-0 p-0 justify-content-center'>
                     {
                      fileUrls.map(url => (
-                       <a key={url.index} href={url} value={url} download={url.split('uploads')[2].split('-')[0]} className='cairo f-13 p-0'>{url.split('uploads')[2].split('-')[0]}</a>
+                       <a key={url.index} href={url} value={url} download={url.split('/')[2].split('-')[0]} className='cairo p-0 text-center text-decoration-none'>{url.split('/')[2].split('-')[0]}</a>
                      ))
                     }
                   </div>
