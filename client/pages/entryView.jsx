@@ -6,7 +6,7 @@ export default class EntryView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      entry: {}
+      entry: null
     };
   }
 
@@ -19,7 +19,8 @@ export default class EntryView extends React.Component {
   }
 
   render(props) {
-    const { title, description, imageUrl, printer, totalFilamentUsed, timeToPrint, printSpeed, supports, layerHeight, wallThickness, additionalDetails } = this.state.entry;
+    if (!this.state.entry) return null;
+    const { title, description, imageUrl, printer, totalFilamentUsed, timeToPrint, printSpeed, supports, layerHeight, wallThickness, additionalDetails, fileUrls } = this.state.entry;
     const printTime = String(timeToPrint);
     const hours = printTime[0] + printTime[1];
     const minutes = printTime[2] + printTime[3];
@@ -71,13 +72,17 @@ export default class EntryView extends React.Component {
               </Accordion.Item>
             </Accordion>
           </div>
-          <div className='col-md-6 p-2 none'>
+          <div className='col-md-6 p-2'>
             <Accordion >
-              <Accordion.Item eventKey="1" className='bg-gray border-0'>
-                <Accordion.Header>files</Accordion.Header>
+              <Accordion.Item eventKey="1" className='bg-gray border-0 shadow'>
+                <Accordion.Header>Files</Accordion.Header>
                 <Accordion.Body className='p-2'>
-                  <div className='col-12 bg-white row rounded m-0 p-2'>
-                    <p>files placeholder</p>
+                  <div className='col-12 row rounded m-0 p-0'>
+                    {
+                     fileUrls.map(url => (
+                       <a key={url.index} href={url} value={url} download={url.split('uploads')[2].split('-')[0]} className='cairo f-13 p-0'>{url.split('uploads')[2].split('-')[0]}</a>
+                     ))
+                    }
                   </div>
                 </Accordion.Body>
               </Accordion.Item>
