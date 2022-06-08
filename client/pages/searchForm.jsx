@@ -12,7 +12,9 @@ export default class SearchForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    window.location.hash = 'search?tag=' + this.state.tag;
+    if (this.state.tag !== ' ') {
+      window.location.hash = 'search?tag=' + this.state.tag;
+    }
   }
 
   handleSearchInput(event) {
@@ -22,10 +24,10 @@ export default class SearchForm extends React.Component {
   render() {
     return (
         <div className='container-fluid bg-gray d-flex justify-content-center flex-column'>
-          <h2 className='text-center  cairo mt-3'>Find a Print</h2>
-          <form className=' d-flex justify-content-center' onSubmit={this.handleSubmit}>
-            <input type="rounded" onChange={this.handleSearchInput}></input>
-            <button type="submit" className=' rounded'>Submit</button>
+          <h2 className='text-center cairo mt-5 text-shadow f-28'>Find a Print</h2>
+          <form className=' d-flex justify-content-center mt-2' onSubmit={this.handleSubmit}>
+            <input type="text" placeholder = "Search" className="search-box col-md-4 rounded orange-styling ps-2"onChange={this.handleSearchInput}></input>
+            <button type="submit" className='rounded orange-styling'>Submit</button>
           </form>
         </div>
     );

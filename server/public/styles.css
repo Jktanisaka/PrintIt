@@ -57,7 +57,11 @@ label {
 }
 
 .f-36 {
-  font-size: 2rem;
+  font-size: 36px;
+}
+
+.f-28 {
+  font-size: 28px;
 }
 
 .btn-orange-custom {
@@ -113,4 +117,16 @@ img {
 
 .none {
   display: none;
+}
+
+.orange-styling {
+  height: 2.5rem;
+  margin-right: 2px;
+  color: #f15025;
+  border: 1.5px solid #f15025 !important;
+}
+
+.search-box:focus {
+  color: black;
+  outline: none !important;
 }
