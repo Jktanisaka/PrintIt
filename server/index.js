@@ -21,6 +21,26 @@ if (process.env.NODE_ENV === 'development') {
 
 app.use(express.static(publicPath));
 
+app.get('/api/tags/:label', (req, res, next) => {
+  const label = req.params.label;
+  const sql = `
+    select "title", "imageUrl", "entryId"
+    from entries
+    join "entryTags" using ("entryId")
+    join "tags" using ("tagId")
+    where "label" = $1
+  `;
+  const params = [label];
+  db.query(sql, params)
+    .then(result => {
+      if (!result.rows[0]) {
+        throw new ClientError(404, `cannot find entries that have the tag: ${label}`);
+      }
+      res.status(201).json(result.rows);
+    })
+    .catch(err => next(err));
+});
+
 app.get('/api/entries/:entryId', (req, res, next) => {
   const entryId = Number(req.params.entryId);
   const sql = `

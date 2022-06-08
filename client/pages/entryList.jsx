@@ -17,7 +17,6 @@ export default class EntryList extends React.Component {
   }
 
   render(props) {
-
     return (
       <div className ="container-fluid pb-3 row justify-content-center m-0">
         <h1 className="catamaran text-shadow mt-3 col-md-9">Entries</h1>
