@@ -48,7 +48,7 @@ export default class SignUp extends React.Component {
           <label htmlFor='password' className='p-0' name="password">Password</label>
           <input type="password" className="form-control cairo mb-3 border-dark border-2" id="password" value={this.state.password} onChange={this.handlePassword}></input>
           <div className="container-fluid justify-content-center col-12 mt-3 mb-5 p-0">
-            <button type="submit" className="bg-orange btn btn-lg p-3  btn-outline-secondary text-light col-12 cairo shadow">Register</button>
+            <button type="submit" className="bg-orange btn btn-lg p-0  btn-outline-secondary text-light col-12 cairo shadow btn-h-55 align-center">Register</button>
           </div>
         </div>
       </form>

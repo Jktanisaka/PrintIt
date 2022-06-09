@@ -12,6 +12,12 @@
   background-color: #f3efef !important;
 }
 
+.nav-button-styling {
+  background-color: #ced0ce !important;
+  border: 1px solid white !important;
+  color: black !important;
+}
+
 .full-height {
   min-height: 100vh;
 }
@@ -69,7 +75,7 @@ label {
 }
 
 .f-28 {
-  font-size: 28px;
+  font-size: 28px !important;
 }
 
 .btn-orange-custom {
@@ -137,4 +143,12 @@ img {
 .search-box:focus {
   color: black;
   outline: none !important;
+}
+
+.btn-h-55 {
+  height: 55px;
+}
+
+.focus-none:focus {
+  box-shadow: none !important;
 }
