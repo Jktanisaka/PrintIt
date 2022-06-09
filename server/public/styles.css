@@ -20,9 +20,17 @@
   background-color: white;
 }
 
+.navbar {
+  height: 55px;
+}
+
 .cairo {
   font-family: cairo, sans-serif;
   font-weight: normal;
+}
+
+i {
+  background-color: #f15025;
 }
 
 .cairo-bold {
@@ -37,7 +45,7 @@
 }
 
 .white-text {
-  color: white;
+  color: white !important;
 }
 
 .text-shadow {
@@ -57,7 +65,7 @@ label {
 }
 
 .f-36 {
-  font-size: 36px;
+  font-size: 36px !important;
 }
 
 .f-28 {

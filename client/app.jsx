@@ -5,6 +5,7 @@ import SearchResults from './pages/searchResults';
 import EntryForm from './pages/entryForm';
 import EntryList from './pages/entryList';
 import EntryView from './pages/entryView';
+import SignUp from './pages/signUp';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import parseRoute from './lib/parse-route';
@@ -42,6 +43,9 @@ export default class App extends React.Component {
     }
     if (route.path === 'search') {
       return <SearchForm />;
+    }
+    if (route.path === 'sign-up') {
+      return <SignUp />;
     }
   }
 
