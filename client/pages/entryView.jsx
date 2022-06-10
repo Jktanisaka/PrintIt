@@ -21,7 +21,10 @@ export default class EntryView extends React.Component {
   render(props) {
     if (!this.state.entry) return null;
     const { title, description, imageUrl, printer, totalFilamentUsed, timeToPrint, printSpeed, supports, layerHeight, wallThickness, additionalDetails, fileUrls } = this.state.entry;
-    const printTime = String(timeToPrint);
+    let printTime = String(timeToPrint);
+    if (printTime.length === 3) {
+      printTime = '0' + printTime;
+    }
     const hours = printTime[0] + printTime[1];
     const minutes = printTime[2] + printTime[3];
     return (

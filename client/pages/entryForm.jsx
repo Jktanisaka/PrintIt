@@ -49,18 +49,26 @@ export default class EntryForm extends React.Component {
     formData.append('searchTags', this.state.searchTags);
     formData.append('image', this.imageInputRef.current.files[0]);
     const tagsArr = this.state.searchTags.split(' ');
+    if (this.state.hoursToPrint.length < 2) {
+      this.setState({ hoursToPrint: '0' + this.state.hoursToPrint });
+    }
     if (this.state.minutesToPrint.length < 2) {
-      const convertedMinutes = '0' + this.state.minutesToPrint;
-      formData.append('timeToPrint', this.state.hoursToPrint + convertedMinutes);
-    } else { formData.append('timeToPrint', this.state.hoursToPrint + this.state.minutesToPrint); }
+      this.setState({ minutesToPrint: '0' + this.state.minutesToPrint });
+    }
+    formData.append('timeToPrint', this.state.hoursToPrint + this.state.minutesToPrint);
     for (let i = 0; i < this.objectFilesRef.current.files.length; i++) {
       formData.append('objects', this.objectFilesRef.current.files[i]);
     }
     for (let i = 0; i < tagsArr.length; i++) {
       formData.append('tags', tagsArr[i]);
     }
+    const userId = this.props.userId;
+    formData.append('userId', userId);
     return fetch('api/uploads', {
       method: 'POST',
+      headers: {
+        'X-Access-Token': `${window.localStorage.getItem('react-jwt')}`
+      },
       body: formData
     }).then(res => res.json())
       .then(response => {

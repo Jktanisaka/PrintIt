@@ -1,9 +1,11 @@
 require('dotenv/config');
 const argon2 = require('argon2');
+const jwt = require('jsonwebtoken');
 const pg = require('pg');
 const path = require('path');
 const ClientError = require('./client-error');
 const express = require('express');
+const authorizationMiddleware = require('./authorization-middleware');
 const errorMiddleware = require('./error-middleware');
 const uploadsMiddleware = require('./uploads-middleware');
 const db = new pg.Pool({
@@ -22,6 +24,39 @@ if (process.env.NODE_ENV === 'development') {
 
 app.use(express.static(publicPath));
 app.use(express.json());
+
+app.post('/api/auth/sign-in', (req, res, next) => {
+  const { username, password } = req.body;
+  if (!username || !password) {
+    throw new ClientError(401, 'invalid login');
+  }
+  const sql = `
+    select "userId",
+           "hashedPassword"
+      from "users"
+     where "username" = $1
+  `;
+  const params = [username];
+  db.query(sql, params)
+    .then(result => {
+      const [user] = result.rows;
+      if (!user) {
+        throw new ClientError(401, 'invalid login');
+      }
+      const { userId, hashedPassword } = user;
+      return argon2
+        .verify(hashedPassword, password)
+        .then(isMatching => {
+          if (!isMatching) {
+            throw new ClientError(401, 'invalid login');
+          }
+          const payload = { userId, username };
+          const token = jwt.sign(payload, process.env.TOKEN_SECRET);
+          res.json({ token, user: payload });
+        });
+    })
+    .catch(err => next(err));
+});
 
 app.post('/api/auth/sign-up', (req, res, next) => {
   const { username, password } = req.body;
@@ -121,19 +156,21 @@ app.get('/api/users/:userId/entries', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.use(authorizationMiddleware);
+
 app.post('/api/uploads', express.urlencoded(), uploadsMiddleware, (req, res, next) => {
   const sql = `
   with "newEntry" as (
     insert into "entries" ("userId", "description", "title", "printer", "totalFilamentUsed", "timeToPrint", "createdAt", "printSpeed", "supports", "layerHeight", "wallThickness", "additionalDetails", "imageUrl")
-    values (1, $1, $2, $3, $4, $5, now(), $6, $7, $8, $9, $10, $11)
+    values ($1, $2, $3, $4, $5, $6, now(), $7, $8, $9, $10, $11, $12)
     returning "entryId"
   ), "newFiles" as (
     insert into "files" ("entryId", "fileUrl")
-    select "entryId", unnest($12::text[])
+    select "entryId", unnest($13::text[])
     from "newEntry"
   ), "newTags" as (
     insert into "tags" ("label")
-    select unnest($13::text[]) on conflict("label") do nothing
+    select unnest($14::text[]) on conflict("label") do nothing
     returning "tagId"
   ), "associatedTags" as (
     insert into "entryTags" ("entryId", "tagId")
@@ -145,7 +182,7 @@ app.post('/api/uploads', express.urlencoded(), uploadsMiddleware, (req, res, nex
       union
       select "ot"."tagId"
       from "tags" as "ot"
-      where "ot"."label" = any ($13::text[])
+      where "ot"."label" = any ($14::text[])
     ) as "t" on true
   )
   select * from "newEntry"
@@ -155,12 +192,13 @@ app.post('/api/uploads', express.urlencoded(), uploadsMiddleware, (req, res, nex
     printSpeed, supports, layerHeight, wallThickness, additionalDetails,
     tags
   } = req.body;
+  const userId = req.user.userId;
   const image = req.files.image[0];
   const imageUrl = '/uploads/' + image.filename;
   const objectFileUrls = req.files.objects.map(file => {
     return '/uploads/' + file.filename;
   });
-  const params = [description, title, printer, totalFilamentUsed, timeToPrint,
+  const params = [userId, description, title, printer, totalFilamentUsed, timeToPrint,
     printSpeed, supports, layerHeight, wallThickness, additionalDetails, imageUrl,
     objectFileUrls, tags];
   db.query(sql, params)
