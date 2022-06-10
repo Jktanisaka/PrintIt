@@ -18,7 +18,7 @@ export default class EntryList extends React.Component {
 
   render(props) {
     return (
-      <div className ="container-fluid pb-3 row justify-content-center m-0">
+      <div className ="container-fluid pb-3 row justify-content-center ps-5 m-0">
         <h1 className="catamaran text-shadow mt-3 col-md-9">Entries</h1>
         <div className='row justify-content-center'>
           <div className='row justify-content-start align-content-center col-md-10 ms-md-3'>
