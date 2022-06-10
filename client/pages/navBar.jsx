@@ -25,13 +25,18 @@ export default class MainNavbar extends React.Component {
                 PrintIt
               </Offcanvas.Title>
             </Offcanvas.Header>
-            <Offcanvas.Body className='bg-orange pt-0'>
+            <Offcanvas.Body className='bg-orange pt-0 align-items-end'>
               <Nav className="justify-content-end flex-grow-1 pe-3 text-center">
                 <Nav.Link href="#search" className='btn nav-button-styling m-2'>Search</Nav.Link>
                 <Nav.Link href={'#entries?userId=' + userId} className='btn nav-button-styling m-2'>My Entries</Nav.Link>
                 <Nav.Link href="#create" className='btn nav-button-styling m-2'>Create Entry</Nav.Link>
               </Nav>
             </Offcanvas.Body>
+              <Offcanvas.Body className='bg-orange pt-0 align-items-end justify-content-end d-flex'>
+                <Nav className=" flex-grow-1 text-center pe-3">
+                  <Nav.Link className='btn nav-button-styling m-2 position-relative' onClick={this.props.onSignOut}>Log Out <i className="fa-solid fa-arrow-right-to-bracket bg-dark-gray position-absolute absolute-styling"></i></Nav.Link>
+                </Nav>
+              </Offcanvas.Body>
           </Navbar.Offcanvas>
         </Container>
       </Navbar>

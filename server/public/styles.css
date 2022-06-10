@@ -152,3 +152,12 @@ img {
 .focus-none:focus {
   box-shadow: none !important;
 }
+
+.bg-dark-gray {
+  background-color: #ced0ce;
+}
+
+.absolute-styling {
+  top: 31%;
+  right: 10%;
+}

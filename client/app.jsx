@@ -20,6 +20,7 @@ export default class App extends React.Component {
       route: parseRoute(window.location.hash)
     };
     this.handleSignIn = this.handleSignIn.bind(this);
+    this.handleSignOut = this.handleSignOut.bind(this);
   }
 
   componentDidMount() {
@@ -35,6 +36,11 @@ export default class App extends React.Component {
     const { user, token } = results;
     window.localStorage.setItem('react-jwt', token);
     this.setState({ user });
+  }
+
+  handleSignOut() {
+    window.localStorage.removeItem('react-jwt');
+    this.setState({ user: null });
   }
 
   renderPage() {
@@ -68,7 +74,7 @@ export default class App extends React.Component {
   render() {
     return (
       <div className='bg-gray full-height'>
-        <MainNavbar user={this.state.user}/>
+        <MainNavbar user={this.state.user} onSignOut={this.handleSignOut}/>
         {this.renderPage()}
       </div>
     );
