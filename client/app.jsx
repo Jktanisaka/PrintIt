@@ -2,6 +2,8 @@ import React from 'react';
 import MainNavbar from './pages/navBar';
 import SearchForm from './pages/searchForm';
 import SearchResults from './pages/searchResults';
+import jwtDecode from 'jwt-decode';
+import LogIn from './pages/logIn';
 import EntryForm from './pages/entryForm';
 import EntryList from './pages/entryList';
 import EntryView from './pages/entryView';
@@ -14,14 +16,25 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      user: null,
       route: parseRoute(window.location.hash)
     };
+    this.handleSignIn = this.handleSignIn.bind(this);
   }
 
   componentDidMount() {
     window.addEventListener('hashchange', event => {
       this.setState({ route: parseRoute(window.location.hash) });
     });
+    const token = window.localStorage.getItem('react-token');
+    const user = token ? jwtDecode(token) : null;
+    this.setState({ user });
+  }
+
+  handleSignIn(results) {
+    const { user, token } = results;
+    window.localStorage.setItem('react-token', token);
+    this.setState({ user });
   }
 
   renderPage() {
@@ -47,14 +60,17 @@ export default class App extends React.Component {
     if (route.path === 'sign-up') {
       return <SignUp />;
     }
+    if (route.path === 'log-in') {
+      return <LogIn handleSignIn={this.handleSignIn}/>;
+    }
   }
 
   render() {
     return (
       <div className='bg-gray full-height'>
-    <MainNavbar />
-    {this.renderPage()}
-    </div>
+        <MainNavbar user={this.state.user}/>
+        {this.renderPage()}
+      </div>
     );
   }
 }

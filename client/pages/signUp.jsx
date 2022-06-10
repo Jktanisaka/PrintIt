@@ -24,7 +24,7 @@ export default class SignUp extends React.Component {
     fetch('/api/auth/sign-up', req)
       .then(res => res.json())
       .then(result => {
-        window.location.hash = 'sign-in';
+        window.location.hash = 'log-in';
       });
 
   }
