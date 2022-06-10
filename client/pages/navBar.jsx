@@ -5,17 +5,10 @@ import Offcanvas from 'react-bootstrap/Offcanvas';
 import Nav from 'react-bootstrap/Nav';
 
 export default class MainNavbar extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      something: null
-    };
-  }
 
   render(props) {
-
-    // const userId = this.props.user.userId;
     if (this.props.user) {
+      const userId = this.props.user.userId;
       return (
       <Navbar expand='false' className="mb-3 bg-orange pt-0 navbar-dark">
         <Container fluid className=''>
@@ -35,7 +28,8 @@ export default class MainNavbar extends React.Component {
             <Offcanvas.Body className='bg-orange pt-0'>
               <Nav className="justify-content-end flex-grow-1 pe-3 text-center">
                 <Nav.Link href="#search" className='btn nav-button-styling m-2'>Search</Nav.Link>
-                  <Nav.Link href="#entries?userId=" className='btn nav-button-styling m-2'>My Entries</Nav.Link>
+                <Nav.Link href={'#entries?userId=' + userId} className='btn nav-button-styling m-2'>My Entries</Nav.Link>
+                <Nav.Link href="#create" className='btn nav-button-styling m-2'>Create Entry</Nav.Link>
               </Nav>
             </Offcanvas.Body>
           </Navbar.Offcanvas>

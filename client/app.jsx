@@ -26,21 +26,21 @@ export default class App extends React.Component {
     window.addEventListener('hashchange', event => {
       this.setState({ route: parseRoute(window.location.hash) });
     });
-    const token = window.localStorage.getItem('react-token');
+    const token = window.localStorage.getItem('react-jwt');
     const user = token ? jwtDecode(token) : null;
     this.setState({ user });
   }
 
   handleSignIn(results) {
     const { user, token } = results;
-    window.localStorage.setItem('react-token', token);
+    window.localStorage.setItem('react-jwt', token);
     this.setState({ user });
   }
 
   renderPage() {
     const { route } = this.state;
     if (route.path === 'create') {
-      return <EntryForm />;
+      return <EntryForm userId = {this.state.user.userId}/>;
     }
     if (route.path === 'entries') {
       const userId = this.state.route.params.get('userId');

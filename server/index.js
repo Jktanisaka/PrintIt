@@ -156,19 +156,21 @@ app.get('/api/users/:userId/entries', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.use(authorizationMiddleware);
+
 app.post('/api/uploads', express.urlencoded(), uploadsMiddleware, (req, res, next) => {
   const sql = `
   with "newEntry" as (
     insert into "entries" ("userId", "description", "title", "printer", "totalFilamentUsed", "timeToPrint", "createdAt", "printSpeed", "supports", "layerHeight", "wallThickness", "additionalDetails", "imageUrl")
-    values (1, $1, $2, $3, $4, $5, now(), $6, $7, $8, $9, $10, $11)
+    values ($1, $2, $3, $4, $5, $6, now(), $7, $8, $9, $10, $11, $12)
     returning "entryId"
   ), "newFiles" as (
     insert into "files" ("entryId", "fileUrl")
-    select "entryId", unnest($12::text[])
+    select "entryId", unnest($13::text[])
     from "newEntry"
   ), "newTags" as (
     insert into "tags" ("label")
-    select unnest($13::text[]) on conflict("label") do nothing
+    select unnest($14::text[]) on conflict("label") do nothing
     returning "tagId"
   ), "associatedTags" as (
     insert into "entryTags" ("entryId", "tagId")
@@ -180,13 +182,13 @@ app.post('/api/uploads', express.urlencoded(), uploadsMiddleware, (req, res, nex
       union
       select "ot"."tagId"
       from "tags" as "ot"
-      where "ot"."label" = any ($13::text[])
+      where "ot"."label" = any ($14::text[])
     ) as "t" on true
   )
   select * from "newEntry"
   `;
   const {
-    description, title, printer, totalFilamentUsed, timeToPrint,
+    userId, description, title, printer, totalFilamentUsed, timeToPrint,
     printSpeed, supports, layerHeight, wallThickness, additionalDetails,
     tags
   } = req.body;
@@ -195,7 +197,7 @@ app.post('/api/uploads', express.urlencoded(), uploadsMiddleware, (req, res, nex
   const objectFileUrls = req.files.objects.map(file => {
     return '/uploads/' + file.filename;
   });
-  const params = [description, title, printer, totalFilamentUsed, timeToPrint,
+  const params = [userId, description, title, printer, totalFilamentUsed, timeToPrint,
     printSpeed, supports, layerHeight, wallThickness, additionalDetails, imageUrl,
     objectFileUrls, tags];
   db.query(sql, params)
@@ -205,8 +207,6 @@ app.post('/api/uploads', express.urlencoded(), uploadsMiddleware, (req, res, nex
     })
     .catch(error => next(error));
 });
-
-app.use(authorizationMiddleware);
 
 app.use(errorMiddleware);
 

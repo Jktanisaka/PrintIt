@@ -26,6 +26,10 @@ export default class LogIn extends React.Component {
       .then(result => {
         window.location.hash = 'search';
         this.props.handleSignIn(result);
+        this.setState({
+          username: '',
+          password: ''
+        });
       });
 
   }
