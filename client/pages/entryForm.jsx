@@ -26,7 +26,7 @@ export default class EntryForm extends React.Component {
       hoursToPrint: '',
       minutesToPrint: '',
       printSpeed: '',
-      supports: 'no',
+      supports: '',
       layerHeight: '',
       wallThickness: '',
       additionalDetails: '',
@@ -80,7 +80,7 @@ export default class EntryForm extends React.Component {
           hoursToPrint: '',
           minutesToPrint: '',
           printSpeed: '',
-          supports: 'No',
+          supports: '',
           layerHeight: '',
           wallThickness: '',
           additionalDetails: '',
@@ -147,68 +147,68 @@ export default class EntryForm extends React.Component {
       <form className='row bg-white px-3 px-md-5 mb-3 pt-4 rounded-3 shadow' onSubmit={this.handleSubmit}>
         <div className='col-12 col-md-6'>
         <div className="form-group">
-          <label htmlFor="formFile" className="form-label mb-1 cairo">Upload Image</label>
-            <input className="form-control mb-2" type="file" id="formFile" ref={this.imageInputRef} accept=".png, .jpg, .jpeg, .gif" ></input>
+              <label htmlFor="formFile" className="form-label mb-1 cairo">Upload Image</label>
+              <input className="form-control mb-2" type="file" id="formFile" ref={this.imageInputRef} accept=".png, .jpg, .jpeg, .gif" required></input>
         </div>
         <div className="form-group mb-2">
           <label htmlFor="title" className="cairo">Title</label>
-          <input type="title" className="form-control text-center" id="title" value={this.state.title} onChange={this.handleTitleChange}></input>
+              <input type="title" className="form-control text-center" id="title" value={this.state.title} onChange={this.handleTitleChange} required></input>
         </div>
         <div className="form-group mb-2">
           <label htmlFor="description" className='cairo'>Description</label>
-          <textarea className="form-control" id="description" rows="4" value={this.state.description} onChange={this.handleDescriptionChange}></textarea>
+              <textarea className="form-control" id="description" rows="4" value={this.state.description} onChange={this.handleDescriptionChange} required></textarea>
         </div>
           <div className="form-group mb-2">
           <label htmlFor="printer" className='cairo'>Printer</label>
-            <input type="printer" className="form-control text-center" id="printer" value={this.state.printer} onChange={this.handlePrinterChange}></input>
+              <input type="printer" className="form-control text-center" id="printer" value={this.state.printer} onChange={this.handlePrinterChange} required></input>
         </div>
           <div className="form-group position-relative mb-2">
           <label htmlFor="filamentUsed" className='cairo'>Total Filament Used</label>
-            <input type="filamentUsed" className="form-control text-center" id="filamentUsed" value={this.state.totalFilamentUsed} onChange={this.handleFilamentChange}></input>
+              <input type="filamentUsed" className="form-control text-center" id="filamentUsed" value={this.state.totalFilamentUsed} onChange={this.handleFilamentChange} required></input>
             <span className="position-absolute top-50 end-0 me-3 mt-2 pe-none text-muted">Grams</span>
         </div>
           <div className="form-group row justify-content-between cairo mb-2">
             <label htmlFor="filament" className="cairo">Time to Print</label>
           <span className='col-6 cairo'>
-              <input type="hours" className="form-control col-6 cairo text-center" id="hours" placeholder="Hours" value={this.state.hoursToPrint} onChange={this.handleHoursToPrintChange}></input>
+                <input type="hours" className="form-control col-6 cairo text-center" id="hours" placeholder="Hours" value={this.state.hoursToPrint} onChange={this.handleHoursToPrintChange} required></input>
           </span>
           <span className='col-6 cairo'>
-              <input type="hours" className="form-control cairo text-center" id="minutes" placeholder="Minutes" value={this.state.minutesToPrint} onChange={this.handleMinutesToPrintChange}></input>
+                <input type="hours" className="form-control cairo text-center" id="minutes" placeholder="Minutes" value={this.state.minutesToPrint} onChange={this.handleMinutesToPrintChange} required></input>
           </span>
        </div>
           <div className="form-group mb-2 position-relative">
             <label htmlFor="printSpeed" className='cairo'>Print Speed</label>
-            <input type="printSpeed" className="form-control text-center" id="printSpeed" value={this.state.printSpeed} onChange={this.handlePrintSpeedChange}></input>
+              <input type="printSpeed" className="form-control text-center" id="printSpeed" value={this.state.printSpeed} onChange={this.handlePrintSpeedChange} required></input>
             <span className="position-absolute top-50 end-0 me-3 mt-2 pe-none text-muted">mm/s</span>
         </div>
         </div>
         <div className='col-12 col-md-6'>
         <label htmlFor="supports" className='mb-1 cairo'>Supports</label>
-          <select type="supports" className="form-select cairo mb-2" aria-label="Default select example" value={this.state.supports} onChange={this.handleSupportChange}>
+            <select type="supports" className="form-select cairo mb-2" aria-label="Default select example" value={this.state.supports} onChange={this.handleSupportChange} required>
           <option value="Yes">Yes</option>
           <option value="No">No</option>
         </select>
         <div className="form-group position-relative">
             <label htmlFor="layerHeight" className='cairo'>Layer Height</label>
-            <input type="layerHeight" className="form-control mb-2 text-center" id="layerHeight" value={this.state.layerHeight} onChange={this.handleLayerHeightChange}></input>
+              <input type="layerHeight" className="form-control mb-2 text-center" id="layerHeight" value={this.state.layerHeight} onChange={this.handleLayerHeightChange} required></input>
             <span className="position-absolute top-50 end-0 me-3 mt-2 pe-none text-muted">mm</span>
         </div>
         <div className="form-group position-relative">
           <label htmlFor="wallThickness" className='cairo'>Wall Thickness</label>
-            <input type="wallThickness" className="form-control mb-2 text-center" id="wallThickness" value={this.state.wallThickness} onChange= {this.handleWallThicknessChange}></input>
+              <input type="wallThickness" className="form-control mb-2 text-center" id="wallThickness" value={this.state.wallThickness} onChange={this.handleWallThicknessChange} required></input>
             <span className="position-absolute top-50 end-0 me-3 mt-2 pe-none text-muted">mm</span>
         </div>
         <div className="form-group">
           <label htmlFor="description" className='cairo'>Additional Details</label>
-          <textarea className="form-control mb-2" id="description" rows="4" placeholder='Enter any additional details' value={this.state.additionalDetails} onChange={this.handleAdditonalDetailsChange}></textarea>
+              <textarea className="form-control mb-2" id="description" rows="4" placeholder='Enter any additional details' value={this.state.additionalDetails} onChange={this.handleAdditonalDetailsChange} required></textarea>
         </div>
         <div className="mb-2">
             <label htmlFor="objectFiles" className="cairo">Object File(s)</label>
-          <input className="form-control" type="file" id="objectFiles" multiple ref={this.objectFilesRef}></input>
+              <input className="form-control" type="file" id="objectFiles" multiple ref={this.objectFilesRef} required></input>
         </div>
           <div className="form-group mb-2">
             <label htmlFor="searchTags" className='cairo'>Search Tags</label>
-            <textarea className="form-control" id="searchTags" rows="4" placeholder='Enter tags so others can find your print! eg(plant nature outdoors)' value={this.state.searchTags} onChange={this.handleSearchTagsChange}></textarea>
+              <textarea className="form-control" id="searchTags" rows="4" placeholder='Enter tags so others can find your print! eg(plant nature outdoors)' value={this.state.searchTags} onChange={this.handleSearchTagsChange} required></textarea>
           </div>
         </div>
         <div className="container-fluid justify-content-center col-12 mt-3 mb-5">

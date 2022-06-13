@@ -32,9 +32,9 @@ export default class MainNavbar extends React.Component {
                 <Nav.Link href="#create" className='btn nav-button-styling m-2'>Create Entry</Nav.Link>
               </Nav>
             </Offcanvas.Body>
-              <Offcanvas.Body className='bg-orange pt-0 align-items-end justify-content-end d-flex'>
+              <Offcanvas.Body className='bg-orange pt-0 align-items-end justify-content-end d-flex border-none'>
                 <Nav className=" flex-grow-1 text-center pe-3">
-                  <Nav.Link className='btn nav-button-styling m-2 position-relative' onClick={this.props.onSignOut}>Log Out <i className="fa-solid fa-arrow-right-to-bracket bg-dark-gray position-absolute absolute-styling"></i></Nav.Link>
+                  <Nav.Link className='btn nav-button-styling m-2 position-relative' href="#log-in" onClick={this.props.onSignOut}>Log Out <i className="fa-solid fa-arrow-right-to-bracket bg-dark-gray position-absolute absolute-styling"></i></Nav.Link>
                 </Nav>
               </Offcanvas.Body>
           </Navbar.Offcanvas>
