@@ -25,6 +25,7 @@ export default class SignUp extends React.Component {
       .then(res => res.json())
       .then(result => {
         window.location.hash = 'log-in';
+        this.setState({ username: '', password: '' });
       });
 
   }
