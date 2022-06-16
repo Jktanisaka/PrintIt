@@ -69,6 +69,7 @@ export default class App extends React.Component {
     if (route.path === 'log-in') {
       return <LogIn handleSignIn={this.handleSignIn}/>;
     }
+    return <SearchForm />;
   }
 
   render() {
