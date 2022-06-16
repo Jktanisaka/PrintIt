@@ -194,9 +194,9 @@ app.post('/api/uploads', express.urlencoded(), uploadsMiddleware, (req, res, nex
   } = req.body;
   const userId = req.user.userId;
   const image = req.files.image[0];
-  const imageUrl = req.files.location + image.filename; // '/uploads/' + image.filename;
+  const imageUrl = image.location;
   const objectFileUrls = req.files.objects.map(file => {
-    return req.files.location + file.filename; // '/uploads/' + file.filename;
+    return file.location;
   });
   const params = [userId, description, title, printer, totalFilamentUsed, timeToPrint,
     printSpeed, supports, layerHeight, wallThickness, additionalDetails, imageUrl,
