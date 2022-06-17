@@ -8,6 +8,7 @@ import EntryForm from './pages/entryForm';
 import EntryList from './pages/entryList';
 import EntryView from './pages/entryView';
 import SignUp from './pages/signUp';
+import Loading from './pages/loading';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import parseRoute from './lib/parse-route';
@@ -16,11 +17,13 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      isLoading: false,
       user: null,
       route: parseRoute(window.location.hash)
     };
     this.handleSignIn = this.handleSignIn.bind(this);
     this.handleSignOut = this.handleSignOut.bind(this);
+    this.handleLoading = this.handleLoading.bind(this);
   }
 
   componentDidMount() {
@@ -30,6 +33,10 @@ export default class App extends React.Component {
     const token = window.localStorage.getItem('react-jwt');
     const user = token ? jwtDecode(token) : null;
     this.setState({ user });
+  }
+
+  handleLoading(boolean) {
+    this.setState({ isLoading: boolean });
   }
 
   handleSignIn(results) {
@@ -45,6 +52,9 @@ export default class App extends React.Component {
 
   renderPage() {
     const { route } = this.state;
+    if (this.state.isLoading === true) {
+      return <Loading />;
+    }
     if (route.path === 'create') {
       return <EntryForm userId = {this.state.user.userId}/>;
     }
@@ -58,7 +68,7 @@ export default class App extends React.Component {
     }
     if (route.path === 'search' && this.state.route.params.get('tag')) {
       const tag = this.state.route.params.get('tag');
-      return <SearchResults tag = {tag}/>;
+      return <SearchResults handleLoading={this.handleLoading} tag = {tag}/>;
     }
     if (route.path === 'search') {
       return <SearchForm />;

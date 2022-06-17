@@ -1,4 +1,5 @@
 import React from 'react';
+import Loading from './loading';
 
 export default class EntryForm extends React.Component {
   constructor(props) {
@@ -19,6 +20,7 @@ export default class EntryForm extends React.Component {
     this.imageInputRef = React.createRef();
     this.objectFilesRef = React.createRef();
     this.state = {
+      isLoading: false,
       description: '',
       title: '',
       printer: '',
@@ -36,6 +38,7 @@ export default class EntryForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
+    this.setState({ isLoading: true });
     const formData = new FormData();
     formData.append('description', this.state.description);
     formData.append('title', this.state.title);
@@ -73,6 +76,7 @@ export default class EntryForm extends React.Component {
     }).then(res => res.json())
       .then(response => {
         this.setState({
+          isLoading: false,
           description: '',
           title: '',
           printer: '',
@@ -88,6 +92,7 @@ export default class EntryForm extends React.Component {
         });
         this.objectFilesRef.current.value = null;
         this.imageInputRef.current.value = null;
+        window.location.hash = 'search';
       })
       .catch(err => console.error(err));
   }
@@ -141,6 +146,11 @@ export default class EntryForm extends React.Component {
   }
 
   render() {
+    if (this.state.isLoading === true) {
+      return (
+        <Loading />
+      );
+    }
     return (
     <div className = "container-fluid col-10 pb-3">
       <h1 className = "catamaran text-shadow mt-3">Create Entry</h1>
