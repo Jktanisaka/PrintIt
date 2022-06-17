@@ -1,22 +1,43 @@
 import React from 'react';
+import Loading from './loading';
 
 export default class SearchResults extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      entries: []
+      entries: null,
+      isLoading: false
     };
+    this.render = this.render.bind(this);
+    this.componentDidMount = this.componentDidMount.bind(this);
   }
 
   componentDidMount(props) {
+    this.setState({ isLoading: true });
     fetch(`/api/tags/${this.props.tag}`)
       .then(res => res.json())
       .then(entries => {
         this.setState({ entries });
+        this.setState({ isLoading: false });
       });
   }
 
   render() {
+    if (this.state.isLoading === true) {
+      return <Loading />;
+    }
+    if (this.state.entries === null || this.state.entries.error) {
+      return (
+        <div className="container-fluid pb-3 row justify-content-center m-0">
+          <h1 className="catamaran text-shadow mt-3 col-md-9">Results</h1>
+          <div className='row justify-content-center'>
+            <div className='row justify-content-start align-content-center col-md-10 ms-md-3'>
+                <h4 className='text-center cairo'>No Entries Found</h4>
+            </div>
+          </div>
+        </div>
+      );
+    }
     return (
         <div className="container-fluid pb-3 row justify-content-center m-0">
           <h1 className="catamaran text-shadow mt-3 col-md-9">Results</h1>
