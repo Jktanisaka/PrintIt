@@ -90,8 +90,6 @@ export default class EntryForm extends React.Component {
           additionalDetails: '',
           searchTags: ''
         });
-        this.objectFilesRef.current.value = null;
-        this.imageInputRef.current.value = null;
         window.location.hash = 'search';
       })
       .catch(err => console.error(err));

@@ -17,13 +17,11 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoading: false,
       user: null,
       route: parseRoute(window.location.hash)
     };
     this.handleSignIn = this.handleSignIn.bind(this);
     this.handleSignOut = this.handleSignOut.bind(this);
-    this.handleLoading = this.handleLoading.bind(this);
   }
 
   componentDidMount() {
@@ -33,10 +31,6 @@ export default class App extends React.Component {
     const token = window.localStorage.getItem('react-jwt');
     const user = token ? jwtDecode(token) : null;
     this.setState({ user });
-  }
-
-  handleLoading(boolean) {
-    this.setState({ isLoading: boolean });
   }
 
   handleSignIn(results) {
