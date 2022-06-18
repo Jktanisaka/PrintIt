@@ -1,13 +1,13 @@
 import React from 'react';
-import MainNavbar from './pages/navBar';
-import SearchForm from './pages/searchForm';
-import SearchResults from './pages/searchResults';
+import MainNavbar from './pages/nav-bar';
+import SearchForm from './pages/search-form';
+import SearchResults from './pages/search-results';
 import jwtDecode from 'jwt-decode';
-import LogIn from './pages/logIn';
-import EntryForm from './pages/entryForm';
-import EntryList from './pages/entryList';
-import EntryView from './pages/entryView';
-import SignUp from './pages/signUp';
+import LogIn from './pages/log-in';
+import EntryForm from './pages/entry-form';
+import EntryList from './pages/entry-list';
+import EntryView from './pages/entry-view';
+import SignUp from './pages/sign-up';
 import Loading from './pages/loading';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
