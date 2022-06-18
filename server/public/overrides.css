@@ -1,0 +1,53 @@
+.accordion-button {
+  justify-content: center !important;
+  text-align: center !important;
+  background-color: #f15025 !important;
+  height: 28px !important;
+  color: white !important;
+}
+
+.accordion-button::after {
+  display: none !important;
+}
+
+.orange-styling {
+  height: 2.5rem;
+  margin-right: 2px;
+  color: #f15025;
+  border: 1.5px solid #f15025 !important;
+}
+
+.search-box:focus {
+  color: black;
+  outline: none !important;
+}
+
+.focus-none:focus {
+  box-shadow: none !important;
+}
+
+.f-36 {
+  font-size: 2.25rem !important;
+}
+
+.f-28 {
+  font-size: 1.75rem !important;
+}
+
+.bg-orange {
+  background-color: #f15025 !important;
+}
+
+.white-text {
+  color: white !important;
+}
+
+.bg-gray {
+  background-color: #f3efef !important;
+}
+
+.nav-button-styling {
+  background-color: #ced0ce !important;
+  border: 1px solid white !important;
+  color: black !important;
+}

@@ -1,21 +1,11 @@
 .righteous {
   font-family: righteous, sans-serif;
-  font-size: 48px;
+  font-size: 3rem;
 }
 
 .catamaran {
   font-family: catamaran, sans-serif;
   font-weight: bold;
-}
-
-.bg-gray {
-  background-color: #f3efef !important;
-}
-
-.nav-button-styling {
-  background-color: #ced0ce !important;
-  border: 1px solid white !important;
-  color: black !important;
 }
 
 .full-height {
@@ -42,16 +32,8 @@ i {
 .cairo-bold {
   font-family: cairo, sans-serif;
   font-weight: bold;
-  font-size: 14px;
+  font-size: 0.875rem;
   color: black;
-}
-
-.bg-orange {
-  background-color: #f15025 !important;
-}
-
-.white-text {
-  color: white !important;
 }
 
 .text-shadow {
@@ -63,19 +45,11 @@ i {
 }
 
 label {
-  font-size: 22px;
+  font-size: 1.375rem;
 }
 
 .f-13 {
   font-size: 13px;
-}
-
-.f-36 {
-  font-size: 36px !important;
-}
-
-.f-28 {
-  font-size: 28px !important;
 }
 
 .btn-orange-custom {
@@ -107,18 +81,6 @@ img {
   box-shadow: 0 0 25px #f15025;
 }
 
-.accordion-button {
-  justify-content: center !important;
-  text-align: center !important;
-  background-color: #f15025 !important;
-  height: 28px !important;
-  color: white !important;
-}
-
-.accordion-button::after {
-  display: none !important;
-}
-
 .display-img {
   background-color: black;
   max-height: 300px;
@@ -133,24 +95,8 @@ img {
   display: none;
 }
 
-.orange-styling {
-  height: 2.5rem;
-  margin-right: 2px;
-  color: #f15025;
-  border: 1.5px solid #f15025 !important;
-}
-
-.search-box:focus {
-  color: black;
-  outline: none !important;
-}
-
 .btn-h-55 {
   height: 55px;
-}
-
-.focus-none:focus {
-  box-shadow: none !important;
 }
 
 .bg-dark-gray {
