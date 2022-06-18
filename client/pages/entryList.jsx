@@ -1,22 +1,42 @@
 import React from 'react';
-
+import Loading from './loading';
 export default class EntryList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      entries: []
+      entries: [],
+      isLoading: false
     };
   }
 
   componentDidMount(props) {
+    this.setState({ isLoading: true });
     fetch(`/api/users/${this.props.userId}/entries`)
       .then(res => res.json())
       .then(entries => {
+        this.setState({ isLoading: false });
         this.setState({ entries });
       });
   }
 
   render(props) {
+    if (this.state.loading === true) {
+      return (
+        <Loading />
+      );
+    }
+    if (this.state.entries === null || this.state.entries.error) {
+      return (
+        <div className="container-fluid pb-3 row justify-content-center m-0">
+          <h1 className="catamaran text-shadow mt-3 col-md-9">Entries</h1>
+          <div className='row justify-content-center'>
+            <div className='row justify-content-start align-content-center col-md-10 ms-md-3'>
+              <h4 className='text-center cairo'>No Entries Found</h4>
+            </div>
+          </div>
+        </div>
+      );
+    }
     return (
       <div className ="container-fluid pb-3 row justify-content-center ps-5 m-0">
         <h1 className="catamaran text-shadow mt-3 col-md-9">Entries</h1>
