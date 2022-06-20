@@ -7,8 +7,8 @@ export default class LogIn extends React.Component {
     this.handleUsername = this.handleUsername.bind(this);
     this.handlePassword = this.handlePassword.bind(this);
     this.state = {
-      username: '',
-      password: ''
+      username: 'JKTPrints',
+      password: 'asdf'
     };
   }
 
