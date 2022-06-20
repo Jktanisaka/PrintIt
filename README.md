@@ -42,7 +42,7 @@ PrintIt was the first full-stack app I built after learning how to implement a b
 ## Getting Started
 1 Clone the repository
 
-`git clone`
+`git clone (name of repository)`
 
 2 Download all dependencies
 
